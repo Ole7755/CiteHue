@@ -1,0 +1,176 @@
+:root {
+    --bg-color: #F5F5F7;
+    --text-primary: #1D1D1F;
+    --text-secondary: #86868B;
+    --card-bg: #FCFCFD; /* 替换纯白 */
+    --font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    --shadow-sm: 0 2px 8px rgba(20, 20, 28, 0.04); /* 替换纯黑阴影，使用带有一点灰蓝的暗色 */
+    --shadow-md: 0 4px 24px rgba(20, 20, 28, 0.06);
+    --shadow-hover: 0 10px 40px rgba(20, 20, 28, 0.08);
+    --radius-lg: 18px;
+    --radius-md: 12px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+    padding: 60px 20px;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.hero p {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 32px;
+}
+
+.palette-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: default;
+    border: 1px solid rgba(20, 20, 28, 0.02);
+}
+
+.palette-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-4px) scale(1.01);
+}
+
+.palette-header {
+    margin-bottom: 24px;
+}
+
+.palette-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+}
+
+.palette-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.colors-container {
+    display: flex;
+    height: 90px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: inset 0 0 0 1px rgba(20, 20, 28, 0.04);
+}
+
+.color-block {
+    flex: 1;
+    cursor: pointer;
+    transition: flex 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+    position: relative;
+}
+
+.color-block:hover {
+    flex: 1.8;
+}
+
+.color-block::after {
+    content: "Copy";
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    color: rgba(250, 250, 252, 0.95); /* 避免纯白 */
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(20, 20, 28, 0.2);
+    transition: opacity 0.2s;
+}
+
+.color-block.light-text::after {
+    color: rgba(30, 30, 32, 0.8); /* 避免纯黑 */
+    text-shadow: none;
+}
+
+.color-block:hover::after {
+    opacity: 1;
+}
+
+.color-codes {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.color-codes span {
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.color-codes span:hover {
+    color: var(--text-primary);
+}
+
+.toast {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px) scale(0.95);
+    background: rgba(35, 35, 38, 0.9); /* 避免纯黑 */
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    color: #FAFAFC; /* 避免纯白 */
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    z-index: 1000;
+    box-shadow: 0 8px 32px rgba(20, 20, 28, 0.15);
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0) scale(1);
+    opacity: 1;
+}
